@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 
+import { Button } from 'react-bootstrap';
+
 const Facebook = () => {
     const router = useRouter();
 
@@ -13,11 +15,14 @@ const Facebook = () => {
         <>
             Hello facebook
             <div>
+                <Button variant="success">Liti Mini</Button>
                 <button
                     onClick={() => handleBtnBack()}
-                >back home</button>
+                >
+                    back home
+                </button>
             </div>
-        </>
+        </> 
     )
 }
 export default Facebook;
