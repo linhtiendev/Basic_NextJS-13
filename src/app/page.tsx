@@ -2,14 +2,14 @@
 // import styles from './page.module.css'
 import Link from "next/link";
 
-// file import sau sẽ ghi đè css file trước nếu dùng giống tên class
-// import '@/app/styles/appSe.css';
-// import '@/app/styles/app.css';
-
 // dùng .module -> sẽ tạo ra class khác
 // tránh việc trùng class
 import x from '@/app/styles/appSe.module.css';
 import y from '@/app/styles/app.module.css';
+
+import AppTable from "@/app/components/Table";
+
+
 
 export default function Home() {
   return (
@@ -116,6 +116,7 @@ export default function Home() {
           </li>
         </ul>
       </div>
+      <AppTable />
     </>
   )
 }
