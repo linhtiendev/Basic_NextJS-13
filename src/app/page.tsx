@@ -5,7 +5,7 @@ import Link from "next/link";
 import x from '@/app/styles/appSe.module.css';
 import y from '@/app/styles/app.module.css';
 
-import AppTable from "@/app/components/Table";
+import AppTable from "@/components/Table";
 import { useEffect } from "react";
 import useSWR from 'swr'
 
@@ -24,9 +24,9 @@ export default function Home() {
       revalidateOnReconnect: false
     }
   );
-  console.log(data);
-  
-
+  if (!data) {
+    return <div>Loading...</div>;
+  }
   // useEffect(() => {
   //   const fetchData = async () => {
   //     const res = await fetch("http://localhost:8000/blogs");
@@ -140,7 +140,9 @@ export default function Home() {
           </li>
         </ul>
       </div>
-      <AppTable />
+      <AppTable 
+        blogs={data}
+      />
     </>
   )
 }

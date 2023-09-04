@@ -8,8 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 
 // import "@/app/components/AppHeader"
-import AppHeader from '@/app/components/AppHeader';
-import AppFooter from '@/app/components/AppFooter';
+import AppHeader from '@/components/AppHeader';
+import AppFooter from '@/components/AppFooter';
 
 
 
