@@ -1,6 +1,6 @@
 "use client";
 
-import footer from '@/app/styles/AppFooter.module.css';
+import footer from '@/styles/AppFooter.module.css';
 
 const AppFooter = () => {
     return (

@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 
-import x from '@/app/styles/appSe.module.css';
-import y from '@/app/styles/app.module.css';
+import x from '@/styles/appSe.module.css';
+import y from '@/styles/app.module.css';
 
 import AppTable from "@/components/Table";
 import { useEffect } from "react";
