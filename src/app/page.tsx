@@ -7,17 +7,34 @@ import y from '@/app/styles/app.module.css';
 
 import AppTable from "@/app/components/Table";
 import { useEffect } from "react";
+import useSWR from 'swr'
 
 export default function Home() {
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("http://localhost:8000/blogs");
-      const data = await res.json()
-      console.log("check res", data);
+  const fetcher = (url: string) => fetch(url)
+  .then((res) => res.json());
+
+  const { data, error, isLoading } = useSWR(
+    "http://localhost:8000/blogs",
+    fetcher,
+    // tắt gọi lại api cũ
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false
     }
-    fetchData();
-  }, [])
+  );
+  console.log(data);
+  
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await fetch("http://localhost:8000/blogs");
+  //     const data = await res.json()
+  //     console.log("check res", data);
+  //   }
+  //   fetchData();
+  // }, [])
 
   return (
     <>
