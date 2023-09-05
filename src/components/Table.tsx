@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import AppModal from '@/components/Modal';
 import { useState } from 'react';
+import UpdateModal from '@/components/Update.Modal';
 
 interface IProps {
   blogs: IBlog[]
@@ -12,7 +13,12 @@ interface IProps {
 const AppTable = (props: IProps) => {
     const {blogs} = props;
     
+    // biến nhận biết đang chỉ định vào 1 blog
+    const [blog, setBlog] = useState<IBlog | null>(null)
+
     const [showModal, setShowModal] = useState<boolean>(false);
+
+    const [showModalUpdate, setShowModalUpdate] = useState<boolean>(false);
   
     return (
       <>
@@ -36,21 +42,31 @@ const AppTable = (props: IProps) => {
             </tr>
           </thead>
           <tbody>
-            {blogs.map(blog => {
+            {blogs.map(item => {
               return (
-                <tr key={blog.id}>
-                <td>{blog.id}</td>
-                <td>{blog.title}</td>
-                <td>{blog.author}</td>
+                <tr key={item.id}>
+                <td>{item.id}</td>
+                <td>{item.title}</td>
+                <td>{item.author}</td>
                 <td>
                   <span>
                     <Button variant="primary">View</Button>
                   </span>
                   <span>
-                    <Button variant="warning" className="mx-3">Edit</Button>
+                    <Button variant="warning" className="mx-3"
+                      onClick={() => {
+                        setBlog(item); // set data chính bằng blog
+                        setShowModalUpdate(true);
+                      }}
+                    >
+                      Edit
+                    </Button>
                   </span>
                   <span>
-                    <Button variant="danger">Delete</Button>
+                    <Button variant="danger"
+                    >
+                      Delete
+                    </Button>
                   </span>
                 </td>
                 </tr>
@@ -62,6 +78,13 @@ const AppTable = (props: IProps) => {
         <AppModal
           showModal={showModal}
           setShowModal={setShowModal}
+        />
+        <UpdateModal 
+          // truyền trạng thái 
+          showModalUpdate={showModalUpdate}
+          setShowModalUpdate={setShowModalUpdate}
+          blog={blog}
+          setBlog={setBlog} // truyền để handle lỗi rỗng
         />
       </>
     )
