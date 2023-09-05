@@ -4,6 +4,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Container from 'react-bootstrap/Container';
 
@@ -33,6 +35,7 @@ export default function RootLayout({
           {children}
         </Container>
         <AppFooter />
+        <ToastContainer />
         </body>
     </html>
   )

@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 // định nghĩ type cho state
 interface Iprops {
@@ -19,7 +20,8 @@ const AppModal = (props: Iprops) => {
     const [content, setContent] = useState<string>("");
 
     const handleSubmit = () => {
-        console.log("check", title, author, content);
+      toast.success("create succeed!")
+      console.log("check", title, author, content);
     }
 
     const handleCloseModal = () => {
