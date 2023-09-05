@@ -140,8 +140,9 @@ export default function Home() {
           </li>
         </ul>
       </div>
-      <AppTable 
-        blogs={data}
+      <AppTable
+      // sort giảm dần 
+        blogs={data?.sort((a: any, b: any) => b.id - a.id)}
       />
     </>
   )

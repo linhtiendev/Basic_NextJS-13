@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { mutate } from 'swr';
 
 // định nghĩ type cho state
 interface Iprops {
@@ -45,6 +46,7 @@ const AppModal = (props: Iprops) => {
           if(res){
             toast.success("Create new blog succeed!");
             handleCloseModal()
+            mutate("http://localhost:8000/blogs") // gọi data khi thành công
           }
         });
     }
