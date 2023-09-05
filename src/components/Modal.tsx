@@ -20,8 +20,33 @@ const AppModal = (props: Iprops) => {
     const [content, setContent] = useState<string>("");
 
     const handleSubmit = () => {
-      toast.success("create succeed!")
-      console.log("check", title, author, content);
+
+      if(!title) {
+        toast.error("empty title")
+        return;
+      }
+      if(!author) {
+        toast.error("empty author")
+        return;
+      }
+      if(!content) {
+        toast.error("empty content")
+        return;
+      }
+      fetch("http://localhost:8000/blogs", {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title, author, content })
+      }).then(res => res.json())
+        .then(res => {
+          if(res){
+            toast.success("Create new blog succeed!");
+            handleCloseModal()
+          }
+        });
     }
 
     const handleCloseModal = () => {
