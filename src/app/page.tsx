@@ -1,9 +1,16 @@
-"use client"
 
 import Link from "next/link";
 
 import x from '@/styles/appSe.module.css';
 import y from '@/styles/app.module.css';
+
+import { Metadata } from "next";
+// dùng để thêm title khi thay đổi page
+
+export const metadata: Metadata = {
+  title: "Home Page",
+  description: "Home Page NextJS13",
+}
 
 export default function Home() {
 
