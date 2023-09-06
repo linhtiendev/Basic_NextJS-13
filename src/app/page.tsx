@@ -5,28 +5,8 @@ import Link from "next/link";
 import x from '@/styles/appSe.module.css';
 import y from '@/styles/app.module.css';
 
-import AppTable from "@/components/Table";
-import { useEffect } from "react";
-import useSWR from 'swr'
-
 export default function Home() {
 
-  const fetcher = (url: string) => fetch(url)
-  .then((res) => res.json());
-
-  const { data, error, isLoading } = useSWR(
-    "http://localhost:8000/blogs",
-    fetcher,
-    // tắt gọi lại api cũ
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false
-    }
-  );
-  if (!data) {
-    return <div>Loading...</div>;
-  }
   // useEffect(() => {
   //   const fetchData = async () => {
   //     const res = await fetch("http://localhost:8000/blogs");
@@ -140,10 +120,6 @@ export default function Home() {
           </li>
         </ul>
       </div>
-      <AppTable
-      // sort giảm dần 
-        blogs={data?.sort((a: any, b: any) => b.id - a.id)}
-      />
     </>
   )
 }

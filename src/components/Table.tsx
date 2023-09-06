@@ -5,6 +5,7 @@ import Table from 'react-bootstrap/Table';
 import AppModal from '@/components/Modal';
 import { useState } from 'react';
 import UpdateModal from '@/components/Update.Modal';
+import Link from 'next/link';
 
 interface IProps {
   blogs: IBlog[]
@@ -49,25 +50,23 @@ const AppTable = (props: IProps) => {
                 <td>{item.title}</td>
                 <td>{item.author}</td>
                 <td>
-                  <span>
-                    <Button variant="primary">View</Button>
-                  </span>
-                  <span>
-                    <Button variant="warning" className="mx-3"
-                      onClick={() => {
-                        setBlog(item); // set data chính bằng blog
-                        setShowModalUpdate(true);
-                      }}
-                    >
-                      Edit
-                    </Button>
-                  </span>
-                  <span>
-                    <Button variant="danger"
-                    >
-                      Delete
-                    </Button>
-                  </span>
+                  <Link 
+                    className='btn btn-primary'
+                    href={`/blogs/${item.id}`}>
+                    View
+                  </Link>                   
+                  <Button variant="warning" className="mx-3"
+                    onClick={() => {
+                      setBlog(item); // set data chính bằng blog
+                      setShowModalUpdate(true);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                  <Button variant="danger"
+                  >
+                    Delete
+                  </Button>
                 </td>
                 </tr>
               )
