@@ -6,6 +6,8 @@ import AppModal from '@/components/Modal';
 import { useState } from 'react';
 import UpdateModal from '@/components/Update.Modal';
 import Link from 'next/link';
+import { toast } from 'react-toastify';
+import { mutate } from 'swr';
 
 interface IProps {
   blogs: IBlog[]
@@ -16,11 +18,28 @@ const AppTable = (props: IProps) => {
     
     // biến nhận biết đang chỉ định vào 1 blog
     const [blog, setBlog] = useState<IBlog | null>(null)
-
     const [showModal, setShowModal] = useState<boolean>(false);
-
     const [showModalUpdate, setShowModalUpdate] = useState<boolean>(false);
   
+    // hàm delete blog
+    const handleDeleteBlog = (id: number) => {
+      if (confirm(`Do you want to delete this blog (id = ${id})`)) {
+        fetch(`http://localhost:8000/blogs/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        })
+        .then(res => res.json())
+        .then(res => {
+          if(res){
+            toast.success("Delete blog succeed!");
+            mutate("http://localhost:8000/blogs") // gọi data khi thành công
+          }
+        });
+      }
+    }
     return (
       <>
         <div className="mb-3" 
@@ -64,6 +83,7 @@ const AppTable = (props: IProps) => {
                     Edit
                   </Button>
                   <Button variant="danger"
+                    onClick={() => handleDeleteBlog(item.id)}
                   >
                     Delete
                   </Button>
